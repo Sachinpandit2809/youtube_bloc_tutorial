@@ -11,16 +11,25 @@ class AppException implements Exception {
 }
 
 class NoInternetException extends AppException {
-  NoInternetException([String? message]) : super(message, "No Internet Connection: ");
+  NoInternetException([String? message])
+      : super(message, "No Internet Connection: ");
 }
 
 class UnAuthorizedException extends AppException {
-  UnAuthorizedException([String? message]) : super(message, "You don't have access to this: ");
+  UnAuthorizedException([String? message])
+      : super(message, "You don't have access to this: ");
 }
 
 class RequestTimeOutException extends AppException {
-  RequestTimeOutException([String? message]) : super(message, "Request Time Out: ");
+  RequestTimeOutException([String? message])
+      : super(message, "Request Time Out: ");
 }
-class FetchDataException extends AppException{
-  FetchDataException([String? message]) : super(message, "Error During Communication: ");
+
+class FetchDataException extends AppException {
+  FetchDataException([String? message])
+      : super(message, "Error During Communication: ");
+}
+
+class BadRequestException extends AppException {
+  BadRequestException([String? message]) : super(message, "Bad request : ");
 }
