@@ -36,6 +36,8 @@ class _LoginScreenState extends State<LoginScreen> {
           child: Form(
             key: formKey,
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 EmailInputWidget(emailFocusNode: emailFocusNode),
                 const SizedBox(

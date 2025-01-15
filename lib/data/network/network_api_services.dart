@@ -1,12 +1,12 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:flutter/material.dart';
 import 'package:youtube_bloc_tutorial/data/exceptions/app_exceptions.dart';
 import 'package:youtube_bloc_tutorial/data/network/base_api_services.dart';
 import 'package:http/http.dart' as http;
 
 class NetworkApiServices implements BaseApiServices {
-
   @override
   Future<dynamic> getApi(String url) async {
     dynamic jsonResponse;
@@ -26,11 +26,19 @@ class NetworkApiServices implements BaseApiServices {
   }
 
   @override
-  Future<dynamic> postApi(String url,var data) async {
-     dynamic jsonResponse;
+  Future<dynamic> postApi(String url, var data) async {
+    debugPrint(url);
+    debugPrint(data.toString());
+
+    dynamic jsonResponse;
     try {
-      final response =
-          await http.post(Uri.parse(url,) , body: data).timeout(const Duration(seconds: 30));
+      final response = await http
+          .post(
+              Uri.parse(
+                url,
+              ),
+              body: data)
+          .timeout(const Duration(seconds: 30));
       jsonResponse = returnResponse(response);
       return jsonResponse;
     } on SocketException {
@@ -39,6 +47,7 @@ class NetworkApiServices implements BaseApiServices {
       throw RequestTimeOutException('');
     }
   }
+
   dynamic returnResponse(http.Response response) {
     switch (response.statusCode) {
       case 200 || 201:

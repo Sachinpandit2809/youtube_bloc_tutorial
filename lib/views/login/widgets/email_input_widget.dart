@@ -32,6 +32,7 @@ class EmailInputWidget extends StatelessWidget {
               return 'Please enter a valid email';
             }
             return null;
+            
           },
         );
       },
