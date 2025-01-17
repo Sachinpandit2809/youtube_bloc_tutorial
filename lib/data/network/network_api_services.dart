@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -9,10 +10,11 @@ import 'package:http/http.dart' as http;
 class NetworkApiServices implements BaseApiServices {
   @override
   Future<dynamic> getApi(String url) async {
-    dynamic jsonResponse;
+    final jsonResponse;
     try {
       final response =
           await http.get(Uri.parse(url)).timeout(const Duration(seconds: 30));
+      debugPrint("raww response:- ${response.body} ...........");
       jsonResponse = returnResponse(response);
       return jsonResponse;
     } on SocketException {
@@ -32,7 +34,7 @@ class NetworkApiServices implements BaseApiServices {
 
     dynamic jsonResponse;
     try {
-      final response = await http
+      dynamic response = await http
           .post(
               Uri.parse(
                 url,
@@ -50,11 +52,12 @@ class NetworkApiServices implements BaseApiServices {
 
   dynamic returnResponse(http.Response response) {
     switch (response.statusCode) {
-      case 200 || 201:
-        var responseJson = response.body;
+      case 200:
+      case 201:
+        var responseJson = jsonDecode(response.body);
         return responseJson;
       case 400:
-        var responseJson = response.body;
+        var responseJson = jsonDecode(response.body);
         return responseJson;
       // throw BadRequestException(response.body.toString());
       case 401:

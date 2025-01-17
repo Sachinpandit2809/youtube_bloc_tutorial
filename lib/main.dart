@@ -3,6 +3,7 @@ import 'package:get_it/get_it.dart';
 import 'package:youtube_bloc_tutorial/config/routes/routes.dart';
 import 'package:youtube_bloc_tutorial/config/routes/routes_name.dart';
 import 'package:youtube_bloc_tutorial/repository/auth/login_repository.dart';
+import 'package:youtube_bloc_tutorial/repository/movies_repository/movies_repository.dart';
 
 GetIt getIt = GetIt.instance;
 
@@ -31,6 +32,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
-  seviceLocater(){
-    getIt.registerLazySingleton<LoginRepository>(() => LoginRepository());
-  }
+seviceLocater() {
+  getIt.registerLazySingleton<LoginRepository>(() => LoginRepository());
+  getIt.registerLazySingleton<MoviesRepository>(() => MoviesRepository());
+}
