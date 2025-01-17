@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:youtube_bloc_tutorial/config/routes/routes.dart';
 import 'package:youtube_bloc_tutorial/config/routes/routes_name.dart';
+import 'package:youtube_bloc_tutorial/repository/auth/login_repository.dart';
 
-
+GetIt getIt = GetIt.instance;
 
 void main() {
+  seviceLocater();
   runApp(const MyApp());
 }
 
@@ -22,9 +25,12 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-    initialRoute: RoutesName.splashScreen,
-    onGenerateRoute: Routes.generateRoute,
-  
+      initialRoute: RoutesName.splashScreen,
+      onGenerateRoute: Routes.generateRoute,
     );
   }
 }
+
+  seviceLocater(){
+    getIt.registerLazySingleton<LoginRepository>(() => LoginRepository());
+  }

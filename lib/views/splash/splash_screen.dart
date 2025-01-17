@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:youtube_bloc_tutorial/config/routes/routes_name.dart';
-import 'package:youtube_bloc_tutorial/services/splash_services.dart';
+import 'package:youtube_bloc_tutorial/services/splash/splash_services.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});

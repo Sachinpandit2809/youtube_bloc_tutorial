@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:youtube_bloc_tutorial/bloc/login/login_bloc.dart';
+import 'package:youtube_bloc_tutorial/main.dart';
 import 'package:youtube_bloc_tutorial/views/login/widgets/email_input_widget.dart';
 import 'package:youtube_bloc_tutorial/views/login/widgets/login_button_widget.dart';
 import 'package:youtube_bloc_tutorial/views/login/widgets/password_input_widget.dart';
@@ -20,7 +21,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   void initState() {
     super.initState();
-    _loginBloc = LoginBloc();
+    _loginBloc = LoginBloc(loginRepository: getIt());
   }
 
   @override

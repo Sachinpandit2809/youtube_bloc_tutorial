@@ -3,14 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:equatable/equatable.dart';
 import 'package:youtube_bloc_tutorial/repository/auth/login_repository.dart';
+import 'package:youtube_bloc_tutorial/services/session_manager/session_controller.dart';
 import 'package:youtube_bloc_tutorial/utils/enum.dart';
 
 part 'login_event.dart';
 part 'login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
-  LoginRepository loginRepository = LoginRepository();
-  LoginBloc() : super(const LoginState()) {
+  // LoginRepository loginRepository = LoginRepository();
+  LoginRepository loginRepository;
+  LoginBloc({required this.loginRepository}) : super(const LoginState()) {
     on<LoginEmailChanged>(_onLoginEmailChange);
     on<LoginPasswordChanged>(_onLoginPasswordChange);
     on<LoginSubmitButtonChanged>(_onLoginSubmitButton);
@@ -32,7 +34,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       'email': state.email,
       'password': state.password,
     };
-    await loginRepository.loginApi(data).then((v) {
+    await loginRepository.loginApi(data).then((v) async{
       //
       debugPrint("${v.error}  ${v.token}");
 
@@ -42,7 +44,10 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         emit(state.copyWith(
             postApiStatus: PostApiStatus.ERROR, message: v.error.toString()));
       } else {
+        //TODO successfull login 
         debugPrint('complete');
+        await SessionController().saveUserInPreference(v);
+        await SessionController().getUserFromPreferences();
 
         emit(state.copyWith(
             postApiStatus: PostApiStatus.SUCCESS,

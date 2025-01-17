@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:youtube_bloc_tutorial/bloc/login/login_bloc.dart';
 import 'package:youtube_bloc_tutorial/config/components/loading_widget.dart';
 import 'package:youtube_bloc_tutorial/config/components/round_button.dart';
+import 'package:youtube_bloc_tutorial/config/routes/routes_name.dart';
 import 'package:youtube_bloc_tutorial/utils/enum.dart';
 import 'package:youtube_bloc_tutorial/utils/flush_bar_helper.dart';
 
@@ -21,6 +22,7 @@ class LoginButtonWidget extends StatelessWidget {
           FlushBarHelper.flushErrorMessage("${state.message}", context);
         }
         if (state.postApiStatus == PostApiStatus.SUCCESS) {
+          Navigator.pushNamed(context, RoutesName.homeScreen);
           FlushBarHelper.flushSuccessMessage("Login SuccessFull", context);
         }
       },
