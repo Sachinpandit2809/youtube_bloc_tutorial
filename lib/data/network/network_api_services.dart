@@ -16,6 +16,7 @@ class NetworkApiServices implements BaseApiServices {
           await http.get(Uri.parse(url)).timeout(const Duration(seconds: 30));
       debugPrint("raww response:- ${response.body} ...........");
       jsonResponse = returnResponse(response);
+      debugPrint("json response:- ${jsonResponse} ...........");
       return jsonResponse;
     } on SocketException {
       throw NoInternetException('');
@@ -50,12 +51,16 @@ class NetworkApiServices implements BaseApiServices {
     }
   }
 
-  dynamic returnResponse(http.Response response) {
+  @override
+  dynamic returnResponse(http.Response response) async {
     switch (response.statusCode) {
       case 200:
-      case 201:
-        var responseJson = jsonDecode(response.body);
+        dynamic responseJson = await jsonDecode(response.body.toString());
+        print("response json response:- ${responseJson} >>>>>>>>>>");
+        print("///////////////////////");
+
         return responseJson;
+      case 201:
       case 400:
         var responseJson = jsonDecode(response.body);
         return responseJson;

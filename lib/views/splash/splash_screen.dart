@@ -23,7 +23,7 @@ class _SplashScreenState extends State<SplashScreen> {
       body: Center(
         child: GestureDetector(
             onTap: () {
-              Navigator.pushNamed(context, RoutesName.homeScreen);
+              Navigator.pushNamed(context, RoutesName.userScreen);
             },
             child: Text('Splash Screen')),
       ),

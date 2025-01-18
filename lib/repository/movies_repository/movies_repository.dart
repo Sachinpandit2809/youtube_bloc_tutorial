@@ -258,9 +258,10 @@ class MoviesRepository {
   BaseApiServices _baseApiServices = NetworkApiServices();
 
   Future<MoviesModel> fetchMoviesApi() async {
-    final response = await _baseApiServices.getApi(AppUrls.posts);
-    // print(response.toString());
+    final response = await _baseApiServices.getApi(AppUrls.movies_List);
+    debugPrint(")))))))))))))))))))))))))))))))");
+    debugPrint(" Movies repository :---" + response.toString());
 
-    return MoviesModel.fromJson(data);
+    return MoviesModel.fromJson(response);
   }
 }

@@ -5,4 +5,6 @@ class AppUrls {
   static const String login_ = "https://reqres.in/api/login";
   static const String movies_List =
       "https://www.episodate.com/api/most-popular?page=1";
+
+      static const String userUrl = "https://jsonplaceholder.typicode.com/users";
 }

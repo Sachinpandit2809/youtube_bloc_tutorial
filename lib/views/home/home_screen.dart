@@ -49,19 +49,37 @@ class _HomeScreenState extends State<HomeScreen> {
                   }
                   final movieList = state.moviesList.data;
 
-                  return ListView.builder(
-                      itemCount: movieList!.tvShows!.length,
-                      itemBuilder: (context, index) {
-                        final tvShow = movieList.tvShows![index];
-                        return ListTile(
-                          leading: CircleAvatar(
-                            child: Image.network(
-                                tvShow.imageThumbnailPath.toString()),
-                          ),
-                          title: Text(tvShow.name ?? "null"),
-                          subtitle: Text(tvShow.network ?? "null"),
-                        );
-                      });
+                  return Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text("Total"),
+                            Text(state.moviesList.data!.total.toString()),
+                          ],
+                        ),
+                        Expanded(
+                          child: ListView.builder(
+                              itemCount: movieList!.tvShows!.length,
+                              itemBuilder: (context, index) {
+                                final tvShow = movieList.tvShows![index];
+                                return ListTile(
+                                  leading: CircleAvatar(
+                                    child: Image.network(
+                                        tvShow.imageThumbnailPath.toString()),
+                                  ),
+                                  title: Text(tvShow.name ?? "null"),
+                                  subtitle: Text(tvShow.network ?? "null"),
+                                );
+                              }),
+                        ),
+                      ],
+                    ),
+                  );
                 default:
                   // TODO: Handle this case.
                   return SizedBox();
